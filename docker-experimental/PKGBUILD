@@ -2,7 +2,7 @@
 # Maintainer: Sébastien "Seblu" Luttringer
 
 pkgname=docker-cr
-pkgver=1.10.0-dev
+pkgver=1.10.0
 pkgrel=1
 epoch=1
 pkgdesc='Pack, ship and run any application as a lightweight container'
@@ -15,7 +15,7 @@ optdepends=('btrfs-progs: btrfs backend support'
 conflicts=('docker')
 
 install=$pkgname.install
-source=("docker-$pkgver"
+source=("docker-$pkgver-dev"
         "docker.sysusers"
         "docker.socket"
         "docker.service"
@@ -27,11 +27,11 @@ md5sums=('c0df98d181afe2a06f8d622f43d69b18'
 
 
 package() {
-  install -Dm755 "docker-$pkgver" "$pkgdir/usr/bin/docker"
+  install -Dm755 "docker-$pkgver-dev" "$pkgdir/usr/bin/docker"
   # systemd
-  install -Dm644 'docker.service' "$pkgdir/usr/lib/systemd/system/docker.service"
-  install -Dm644 'docker.socket' "$pkgdir/usr/lib/systemd/system/docker.socket"
-  install -Dm644 "$srcdir/$pkgname.sysusers" "$pkgdir/usr/lib/sysusers.d/$pkgname.conf"
+  install -Dm644 "$srcdir/docker.service" "$pkgdir/usr/lib/systemd/system/docker.service"
+  install -Dm644 "$srcdir/docker.socket" "$pkgdir/usr/lib/systemd/system/docker.socket"
+  install -Dm644 "$srcdir/docker.sysusers" "$pkgdir/usr/lib/sysusers.d/$pkgname.conf"
 }
 
 # vim:set ts=2 sw=2 et:
